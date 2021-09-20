@@ -1,0 +1,5 @@
+1. 下载xadmin源码并放在根目录之下（在源码文件夹中下载）
+2. 在settings的INSTALLED_APPS中添加
+    crispy_forms 和 xadmin
+3. 安装xadmin的依赖包 cmd cd requirments.txt
+4. 通过migrate生成xadmin需要的表

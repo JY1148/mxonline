@@ -1,0 +1,67 @@
+{% extends "org_base.html" %}
+
+{% block title %}机构首页{% endblock %}
+
+{% block right_form %}
+    <div class="right companycenter layout grouping" >
+		<div class="head">
+			<h1>全部课程</h1>
+			<a class="green fr more" href="{% url 'org:course' course_org.id %}">查看更多  >  </a>
+		</div>
+		<div class="brief group_list">
+            {% for course in all_courses %}
+                <div class="module1_5 box">
+                    <a href="{% url 'course:detail' course.id %}"><img width="214" src="{{MEDIA_URL}}{{ course.image }}"/></a>
+                    <div class="des">
+                        <a href="{% url 'course:detail' course.id %}"><h2>{{ course.name }}</h2></a>
+                        <span class="fl">课时:<i class="key">{{ course.learn_times }}</i></span>
+                        <span class="fr">参加人数:{{ course.students }}</span>
+                    </div>
+                    <div class="bottom">
+                        <span class="fl">{{ course_org.name }}</span><!-- 课程机构course.org本来就是一个外键,所以要继续指明是外键的名字-->
+                         <span class="star fr  notlogin
+                            " data-favid="13"  data-fav-type="4">
+                            0
+                        </span>
+                    </div>
+                </div>
+            {% endfor %}
+
+		</div>
+	</div>
+    <div class="right companycenter layout" >
+    <div class="head">
+        <h1>机构教师</h1>
+        <a class="green fr more" href="{% url 'org:teacher' course_org.id %}">查看更多  >  </a>
+    </div>
+
+    <div class="diarys">
+        {% for teacher in all_teacher %}
+        <div class="module5 share company-diary-box" style="padding:10px 0;">
+            <div class="left">
+                <img class="pic" src="{{ MEDIA_URL }}{{ teacher.image }}"/>
+                <p>职位：{{ teacher.work_position }}</p>
+            </div>
+            <div class="right">
+                <div class="top">
+                    <div class="fl">
+                        <a href=""><h1>{{ teacher.name }}</h1></a>
+                        <span>已经在该岗位上专业浸淫：{{ teacher.work_years }}年了</span>
+                    </div>
+                </div>
+                <div class="middle" style="border-bottom:0;">{{ teacher.points }}</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+<div class="right companycenter layout" >
+    <div class="head">
+        <h1>机构介绍</h1>
+        <a class="green fr more" href="{% url 'org:desc' course_org.id %}">查看更多  >  </a>
+    </div>
+    <div class="cont">
+           {% autoescape off %} {{ course_org.desc }}{% endautoescape %}
+    </div>
+{% endblock %}
